@@ -7,6 +7,7 @@
 
 #include <map>
 #include <vector>
+#include "Node.h"
 
 using namespace std;
 
@@ -16,11 +17,11 @@ class Huffman {
 public:
     char* compress(char *str );
     void compute_probaility(char *str);
-    void sort_by_probaility(map<char,int> &letter_map);
 
 private:
-    static int cmp(const PAIR &x, const PAIR &y);
-    vector<PAIR> pair_vec;
+    static int cmp(const Node *x, const Node *y);
+    map<char,Node*> map_node;
+    vector<Node*> vec_node;
 };
 
 

@@ -3,42 +3,37 @@
 //
 
 #include <iostream>
+#include <algorithm>
 #include "Huffman.h"
 
 char *Huffman::compress(char *str) {
     compute_probaility(str);
 
-
+//    vector<Node*>::iterator it = vec_node.begin();
+    map<char,Node*>::iterator it = map_node.begin();
+    while(it != map_node.end()){
+        cout<<"key: " << it->second->key << " count: " << it->second->count<<endl;
+        it++;
+    }
     return str;
 }
 
 void Huffman::compute_probaility(char *str) {
-    map<char, int> letter_map;
     while (*str) {
-        letter_map[*str] += 1;
-        cout << *str << " count is " << letter_map.find(*str)->second << endl;
+        if (map_node[*str] == nullptr) {
+            Node node(*str, 1, nullptr, nullptr, nullptr);
+            map_node[*str] = &node;
+            vec_node.insert(vec_node.begin(),&node);
+        } else {
+            map_node[*str]->count++;
+        }
         str++;
     }
-    sort_by_probaility(letter_map);
+    sort(vec_node.begin(), vec_node.end(), cmp);
 }
 
-void Huffman::sort_by_probaility(map<char, int> &letter_map) {
-    map<char, int>::iterator it_map = letter_map.begin();
-    while (it_map != letter_map.end()) {
-        pair_vec.insert(pair_vec.begin(), PAIR(it_map->first, it_map->second));
-        it_map++;
-    }
-    sort(pair_vec.begin(), pair_vec.end(), cmp);
-
-    vector<PAIR>::iterator it_vec = pair_vec.begin();
-    while (it_vec != pair_vec.end()) {
-        cout << "key: " << it_vec->first << " value: " << it_vec->second << endl;
-        it_vec++;
-    }
-}
-
-int Huffman::cmp(const PAIR &x, const PAIR &y) {
-    return x.second < y.second;
+int Huffman::cmp(const Node *x, const Node *y) {
+    return x->count < y->count;
 }
 
 
