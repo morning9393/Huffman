@@ -6,10 +6,15 @@
 #define HUFFMAN_HUFFMANTREE_H
 
 
+#include "Node.h"
+
 class HuffmanTree {
 
 public:
 
+
+private:
+    Node *root;
 
 };
 

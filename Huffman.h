@@ -17,11 +17,13 @@ class Huffman {
 public:
     char* compress(char *str );
     void compute_probaility(char *str);
+    void build_huffman_tree();
 
 private:
     static int cmp(const Node *x, const Node *y);
     map<char,Node*> map_node;
     vector<Node*> vec_node;
+    Node *root;
 };
 
 

@@ -8,18 +8,20 @@
 
 struct Node {
 public:
-    Node(char key,int count,Node *left,Node* right,Node* parent){
+    Node(char key, int count, char value, Node *left, Node *right, Node *parent) {
         this->key = key;
         this->count = count;
         this->left = left;
         this->right = right;
         this->parent = parent;
+        this->value = value;
     }
 
     Node *left;
     Node *right;
     Node *parent;
     int count;
+    char value;
     char key;
 };
 
